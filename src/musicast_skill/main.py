@@ -19,7 +19,7 @@
 #  SOFTWARE.
 
 import configparser
-import time
+
 
 from musicast_skill.device import YamahaDevice
 
