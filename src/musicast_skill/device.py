@@ -89,12 +89,7 @@ class YamahaDevice:
         return requests.get(f"{self.system_api}/getSoundProgramList")
 
     @get_response
-    def setAutoPowerStan(self):
-        """Enable/Disable Auto Power Standby"""
-        return requests.get(f"{self.control_api}/setAutoPowerStan")
-
-    @get_response
-    def set_auto_power_stan(self, enable: bool):
+    def set_auto_power_stanby(self, enable: bool):
         """Enable/Disable Auto Power Standby"""
         return requests.get(f"{self.control_api}/setAutoPowerStan", params={"enable": enable})
 
@@ -110,53 +105,45 @@ class YamahaDevice:
 
     @get_response
     def power_toggle(self):
-        """Standby"""
+        """Power Toggle"""
         return requests.get(f"{self.control_api}/setPower", params={"power": "toggle"})
 
     @get_response
     def set_input(self, input: str):
-        """Standby"""
-        return requests.get(f"{self.control_api}/setInput", params={"power": "input"})
+        """Set an input source"""
+        return requests.get(f"{self.control_api}/setInput", params={"power": input})
 
-    @get_response
     def set_spotify(self):
         """Set Spotify as input source"""
         return self.set_input("spotify")
 
-    @get_response
-    def set_spotify(self):
-        """Set Spotify as input source"""
-        return self.set_input("spotify")
-
-    @get_response
     def set_napster(self):
         """Set Napster as input source"""
         return self.set_input("napster")
 
-    @get_response
     def set_net_raio(self):
         """Set Net Radio as input source"""
         return self.set_input("net_radio")
 
-    @get_response
     def set_bluetooth(self):
         """Set Bluetooth as input source"""
         return self.set_input("bluetooth")
 
     @get_response
+    def control_volume(self, action: str):
+        return requests.get(f"{self.control_api}/setVolume", params={"volume": action})
+
     def increase_volume(self):
         """Increment volume"""
-        return requests.get(f"{self.control_api}/setVolume", params={"volume": "up"})
+        return self.control_volume("up")
 
-    @get_response
     def decrease_volume(self):
         """Decrease volume"""
-        return requests.get(f"{self.control_api}/setVolume", params={"volume": "down"})
+        return self.control_volume("down")
 
-    @get_response
     def set_volume(self, level: int):
         """Set Specific volume"""
-        return requests.get(f"{self.control_api}/setVolume", params={"volume": level})
+        return self.control_volume(str(level))
 
     @get_response
     def mute(self):
@@ -167,3 +154,28 @@ class YamahaDevice:
     def unmute(self):
         """Mute device"""
         return requests.get(f"{self.control_api}/setMute", params={"enable": "false"})
+
+    @get_response
+    def playback(self, cmd: str):
+        """Stop"""
+        return requests.get(f"{self.net_usb_api}/setPlayback", params={"playback": cmd})
+
+    def music_stop(self):
+        """Stop"""
+        return self.playback("stop")
+
+    def music_play(self):
+        """Play"""
+        return self.playback("play")
+
+    def next_song(self):
+        """Play"""
+        return self.playback("next")
+
+    def previous_song(self):
+        """Play"""
+        return self.playback("previous")
+
+    @get_response
+    def get_song_info(self):
+        return requests.get(f"{self.net_usb_api}/getPlayInfo")

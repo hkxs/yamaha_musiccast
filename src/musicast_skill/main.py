@@ -19,7 +19,7 @@
 #  SOFTWARE.
 
 import configparser
-
+import time
 
 from musicast_skill.device import YamahaDevice
 
@@ -30,3 +30,21 @@ if __name__ == "__main__":
     device_info = env["DEVICE_INFO"]
     device = YamahaDevice(device_info["IP"])
     print(f"System Info: {device.model}")
+    print("Pausing...")
+    device.music_stop()
+    time.sleep(3)
+    print("Resume...")
+    device.music_play()
+    time.sleep(2)
+    print("Next song")
+    device.next_song()
+    song_info = device.get_song_info()
+    print(f"Track: {song_info.get('track')}")
+    print(f"Album: {song_info.get('album')}")
+    time.sleep(3)
+    print("Never mind, getting back")
+    device.previous_song()
+    time.sleep(1)
+    song_info = device.get_song_info()
+    print(f"Track: {song_info.get('track')}")
+    print(f"Album: {song_info.get('album')}")
