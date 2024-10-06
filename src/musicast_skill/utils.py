@@ -18,15 +18,22 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-import configparser
-import time
+import ipaddress
 
-from musicast_skill.device import YamahaDevice
+from musicast_skill.errors import InvalidIp
 
 
-if __name__ == "__main__":
-    env = configparser.ConfigParser()
-    env.read(".env")
-    device_info = env["DEVICE_INFO"]
-    device = YamahaDevice(device_info["IP"])
-    print(f"System Info: {device.model}")
+def validate_ip(ip_addr: str) -> ipaddress.IPv4Address:
+    """ Validate an IP address """
+    try:
+        ip = ipaddress.ip_address(ip_addr)
+    except ValueError:
+        raise InvalidIp(ip_addr)
+    return ip
+
+
+def get_response(func):
+    def inner_check(*args, **kwargs) -> dict:
+        resp = func(*args, **kwargs)
+        return resp.json() if resp.status_code == 200 else {}
+    return inner_check

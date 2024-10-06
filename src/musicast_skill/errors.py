@@ -18,15 +18,9 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-import configparser
-import time
 
-from musicast_skill.device import YamahaDevice
-
-
-if __name__ == "__main__":
-    env = configparser.ConfigParser()
-    env.read(".env")
-    device_info = env["DEVICE_INFO"]
-    device = YamahaDevice(device_info["IP"])
-    print(f"System Info: {device.model}")
+class InvalidIp(ValueError):
+    """ Exception for invalid IP address """
+    def __init__(self, ip):
+        self.message = f"Invalid IP address {ip}"
+        super().__init__(self.message)
