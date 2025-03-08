@@ -20,7 +20,7 @@
 
 import ipaddress
 
-from musicast_skill.errors import InvalidIp
+from yamaha_device.errors import InvalidIp
 
 
 def validate_ip(ip_addr: str) -> ipaddress.IPv4Address:

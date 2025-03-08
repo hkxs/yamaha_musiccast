@@ -21,7 +21,7 @@
 import configparser
 import time
 
-from musicast_skill.device import YamahaDevice
+from yamaha_device.device import YamahaDevice
 
 
 if __name__ == "__main__":

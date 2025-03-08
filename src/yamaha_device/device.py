@@ -20,8 +20,8 @@
 
 import requests
 
-from musicast_skill.utils import validate_ip
-from musicast_skill.utils import get_response
+from yamaha_device.utils import validate_ip
+from yamaha_device.utils import get_response
 
 
 class YamahaDevice:
