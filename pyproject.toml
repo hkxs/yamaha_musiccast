@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "alexa-musicast"
+name = "yamaha-musicast"
 version = "0.1.0"
-description = "Simple project to control my Yamaha device with alexa"
+description = "Simple project to control my Yamaha device"
 authors = ["hkxs <lalvarezf25@gmail.com>"]
 license = "MIT"
 readme = "README.md"
