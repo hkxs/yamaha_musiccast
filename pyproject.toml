@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "yamaha-musiccast"
+name = "yamaha-device"
 version = "0.1.0"
 description = "Simple project to control my Yamaha device"
 authors = ["hkxs <lalvarezf25@gmail.com>"]
@@ -9,7 +9,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 requests = "2.32.3"
-
 
 [build-system]
 requires = ["poetry-core"]
